@@ -4,8 +4,51 @@
 		<link rel="stylesheet" type="text/css" href="styles/app.css">
 	</head>
 	<body ng-app="angularTest">
+		<h1 style="text-align: center;">ICC WORLD CUP 2015 Teams</h1>
 		<div ng-controller="MainController as mainCtrl">
-			<div team-widget team="team" team-select="mainCtrl.goToTeam(team)" ng-repeat="team in mainCtrl.teams"></div>
+			<div class="filters">
+				<div class="pool-radio">
+					<div style="font-weight: bold;">Select Pool</div>
+					<div>
+						<input type="radio"
+						name="pool"
+						ng-model="mainCtrl.teamFilter.pool"
+						value="A">
+						<label>Pool A</label>
+					</div>
+					<div>
+						<input type="radio"
+						name="pool"
+						ng-model="mainCtrl.teamFilter.pool"
+						value="B">
+						<label>Pool B</label>
+					</div>
+					<div>
+						<button ng-click="mainCtrl.clearFilter()">Clear Filter</button>
+					</div>
+				</div>
+				<div class="sort-order-radio">
+					<div style="font-weight: bold;">Select Order</div>
+					<div>
+						<input type="radio"
+						name="order"
+						ng-model="mainCtrl.sortOrder"
+						value="name">
+						<label>Name</label>
+					</div>
+					<div>
+						<input type="radio"
+						name="order"
+						ng-model="mainCtrl.sortOrder"
+						value="ranking">
+						<label>Ranking</label>
+					</div>
+					<div>
+						<button ng-click="mainCtrl.clearSortOrder()">Clear Filter</button>
+					</div>
+				</div>
+			</div>
+			<div team-widget team="team" ng-repeat="team in mainCtrl.teams | orderBy:mainCtrl.sortOrder | filter: mainCtrl.teamFilter"></div>
 		</div>
 		<script type="text/javascript" src="scripts/angular.js"></script>
 		<script type="text/javascript" src="scripts/angular-route.js"></script>

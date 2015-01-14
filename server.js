@@ -13,16 +13,8 @@ app.use(bodyParser());
 
 app.use('/', serverStatic(__dirname));
 
-
-
 app.get('/api/teams', function(req, res) {
   res.send(ICC.TEAMS_LIST);
-});
-  
-
-app.get('/api/team/:code', function(req, res) {
-  var code = req.params.code;
-  
 });
 
 var port = process.env.PORT || 8000;

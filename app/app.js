@@ -2,9 +2,14 @@ var app = angular.module('angularTest', []);
 
 app.service('MainService', ['$http', '$location', function($http, $location) {
 	var self = this;
-
-	self.getItems = function() {
-		return $http.get('/api/teams');
+	self.teams = [];
+	self.getTeams = function(success, failure) {
+		$http.get('/api/teams').then(function(res) {
+			self.teams = res.data
+			success();
+		}, function(err) {
+			failure(err);
+		});
 	};
 }]);
 
@@ -13,18 +18,23 @@ app.controller('MainController', ['MainService', '$window', function(MainService
    self.teams = [];
 
    var loadTeams = function() {
-   		MainService.getItems().then(function(res) {
-   			console.log('Data : ', res);
-   			self.teams = res.data;
-   		}, function(error) {
-   			console.log('Error : ', error);
+   		MainService.getTeams(function() {
+   			self.teams = MainService.teams;
+   		}, function(err) {
+   			
    		});
    };
    loadTeams();
+   self.sortOrder = 'ranking';
+   self.teamFilter = {pool: ''};
+   
 
-   self.goToTeam = function(team) {
-   		console.log('Selected');
-   		$window.location.href = team.home_page_url;
+   self.clearFilter = function() {
+   		self.teamFilter = {pool : ''};
+   };
+
+   self.clearSortOrder = function() {
+   		self.sortOrder = '';
    };
 }]);
 
@@ -32,15 +42,17 @@ app.directive('teamWidget', [function() {
 	return {
 		restrict: 'A',
 		replace: true,
-		template: '<div ng-click="selectTeam(team)" ng-class="{\'selected\': team.selected}"><img ng-src="{{team.logo_url}}" style="height: 50px; width: 50px;"></img><span ng-bind="team.name"></span></div>',
+		templateUrl: 'app/widget.html',
 		scope: {
-			team: '=',
-			teamSelect: '&'
+			team: '='
 		},
 		link: function(scope, elem, attrs) {
-			scope.selectTeam = function(team) {
-				team.selected = !team.selected;
-				scope.teamSelect({team: team});
+			scope.selectTeam = function() {
+				scope.team.selected = !scope.team.selected;
+			};
+
+			scope.getPoolClass = function() {
+				return 'pool-' + scope.team.pool.toLowerCase();
 			};
 		}
 	};

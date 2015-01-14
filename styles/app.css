@@ -1,0 +1,90 @@
+.team-widget {
+	width: 50%;
+	height: 100px;
+	position: relative;
+	padding: 5px;
+	margin: 20px;
+	border: 1px solid lightgray;
+	cursor: pointer;
+}
+.team-widget.pool-a {
+	background: rgb(185, 220, 219);
+}
+.team-widget.pool-b {
+	background: rgb(174, 188, 220);
+}
+.team-widget:hover {
+	background: whitesmoke;
+}
+.team-widget .content {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.team-widget .content .logo {
+	position: relative;
+	width: 15%;
+	height: 100%;
+	float: left;
+}
+
+.team-widget .content .logo img {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.team-widget .content .info {
+	position: relative;
+	width: 83%;
+	float: left;
+	padding-left: 10px;
+}
+
+.team-widget .content .info .title {
+	font-size: 35px;
+	font-weight: bold;
+}
+.team-widget .content .info .pool {
+	font-size: 20px;
+	color: rgb(50, 43, 51);
+}
+.team-widget .content .info .ranking {
+	color: rgb(50, 43, 51);
+}
+.team-widget .content .info .gotohome {
+	text-align: right;
+}
+.team-widget .content.selected {
+	background: rgb(145, 209, 211);
+}
+
+.filters {
+	height: 100px;
+	border: 2px solid;
+	padding-top: 10px;
+}
+.filters .pool-radio {
+	width: 50%;
+	margin-left: 30%;
+	padding: 10px;
+}
+.filters .pool-radio div {
+	width: 20%;
+	float: left;
+	text-align: left;
+}
+
+.filters .sort-order-radio {
+	width: 50%;
+	margin-left: 30%;
+	padding: 10px;
+	display: flex;
+}
+
+.filters .sort-order-radio div {
+	width: 20%;
+	float: left;
+	text-align: left;
+}

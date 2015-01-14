@@ -1,0 +1,13 @@
+<div class="team-widget" ng-class="getPoolClass()" ng-click="selectTeam()">
+	<div class="content" ng-class="{'selected': team.selected}">
+		<div class="logo">
+			<img ng-src="{{team.logo_url}}"/>
+		</div>
+		<div class="info">
+			<div class="title" ng-bind="team.name"></div>
+			<div class="pool">Pool {{team.pool}}</div>
+			<div class="ranking">Ranking {{team.ranking}}</div>
+			<div class="gotohome"><a ng-href="{{team.home_page_url}}">Go To Team</a></div>
+		</div>
+	</div>
+</div>
